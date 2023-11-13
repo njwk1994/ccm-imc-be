@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.imc</groupId>
+        <artifactId>ccm-imc-modules</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>ccm-imc-schedulermanage</artifactId>
+
+    <description>
+        ccm-imc-schedulermanage
+    </description>
+
+    <dependencies>
+
+        <!-- SpringCloud Alibaba Nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- SpringCloud Alibaba Nacos Config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!-- SpringCloud Alibaba Sentinel -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+
+
+        <!-- SpringBoot Actuator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.imc</groupId>
+            <artifactId>imc-framework</artifactId>
+            <version>${imc-be-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.imc</groupId>
+            <artifactId>imc-common-swagger</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.imc</groupId>
+            <artifactId>ccm-imc-module-framework</artifactId>
+            <version>${ccm-imc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.imc</groupId>
+            <artifactId>ccm-imc-api</artifactId>
+            <version>${ccm-imc.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>docker</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <target>
+                                <echo message="*******************install*******************" />
+                                <copy todir="${basedir}/../../docker/ccm/modules/scheduler/jar" overwrite="true">
+                                    <fileset dir="${project.build.directory}"
+                                             erroronmissingdir="false">
+                                        <include name="*.jar" />
+                                    </fileset>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>package</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <target>
+                                <echo message="******************* demo deploy package copy *******************" />
+                                <copy todir="${basedir}/../../deploy/ccm/scheduler" overwrite="true">
+                                    <fileset dir="${project.build.directory}"
+                                             erroronmissingdir="false">
+                                        <include name="*.jar" />
+                                    </fileset>
+                                </copy>
+                                <copy todir="${basedir}/../../deploy/ccm/scheduler" overwrite="true">
+                                    <fileset dir="src/main/resources"
+                                             erroronmissingdir="false">
+                                        <include name="*.*" />
+                                    </fileset>
+                                </copy>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <!--<execution>
+                        <id>clean</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <target>
+                                <echo message="******************* administrator clean *******************" />
+                                <delete file="${basedir}/../../deploy/imc/administrator/${project.build.finalName}.jar"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>-->
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.json</include>
+                    <include>**/*.ftl</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+</project>
