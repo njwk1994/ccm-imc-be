@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <echo message="******************* demo deploy package copy *******************"/>
+  <copy todir="D:\Project\ccm-imc-be\ccm-imc-modules\ccm-imc-document/../../deploy/ccm/document" overwrite="true">
+    <fileset dir="D:\Project\ccm-imc-be\ccm-imc-modules\ccm-imc-document\target" erroronmissingdir="false">
+      <include name="*.jar"/>
+    </fileset>
+  </copy>
+  <copy todir="D:\Project\ccm-imc-be\ccm-imc-modules\ccm-imc-document/../../deploy/ccm/document" overwrite="true">
+    <fileset dir="src/main/resources" erroronmissingdir="false">
+      <include name="*.*"/>
+    </fileset>
+  </copy>
+</target>
+</project>
