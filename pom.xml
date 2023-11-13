@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.imc</groupId>
+        <artifactId>ccm-imc-be</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>ccm-imc-modules</artifactId>
+    <packaging>pom</packaging>
+    <description>
+        com-modules业务模块
+    </description>
+
+    <modules>
+        <module>ccm-imc-demo</module>
+        <module>ccm-imc-module-framework</module>
+        <module>ccm-imc-general</module>
+        <module>ccm-imc-document</module>
+        <module>ccm-imc-dataretrieve</module>
+        <module>ccm-imc-rop</module>
+        <module>ccm-imc-material</module>
+        <module>ccm-imc-schedulermanage</module>
+        <module>ccm-imc-packagemanage</module>
+        <module>ccm-imc-handover</module>
+    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.imc</groupId>
+            <artifactId>imc-common-security</artifactId>
+        </dependency>
+        <!-- Mysql Connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+
+        <!-- MongoDB 驱动 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
+        <!-- MongoDB SQL转换语法工具 -->
+<!--        <dependency>-->
+<!--            <groupId>com.github.vincentrussell</groupId>-->
+<!--            <artifactId>sql-to-mongo-db-query-converter</artifactId>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+        </dependency>
+
+        <!-- CIM Common DataSource -->
+        <dependency>
+            <groupId>com.imc</groupId>
+            <artifactId>imc-common-datasource</artifactId>
+            <version>${imc-be-core.version}</version>
+        </dependency>
+
+        <!-- CIM Common Log -->
+        <dependency>
+            <groupId>com.imc</groupId>
+            <artifactId>imc-common-log</artifactId>
+            <version>${imc-be-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.imc</groupId>
+            <artifactId>imc-common-core</artifactId>
+            <version>${imc-be-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.imc</groupId>
+            <artifactId>imc-common-rabbitMQ</artifactId>
+            <version>${imc-be-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>QLExpress</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
